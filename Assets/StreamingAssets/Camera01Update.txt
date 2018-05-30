@@ -1,0 +1,27 @@
+	if (Input.GetKeyDown (KeyCode.F1)) CamState=1;
+	if (Input.GetKeyDown (KeyCode.F2)) CamState=2;
+	if (Input.GetKeyDown (KeyCode.F3)) CamState=3;
+	TIME=TIME+1;
+	fov = Camera.main.fieldOfView;
+	fov -= Input.GetAxis("Mouse ScrollWheel") * sensi2;
+	if(CamState==1)
+	{
+		transform.position=Target.transform.position+Vector3(R*Mathf.Sin(3*w*Time.time)*Mathf.Sin(w*Time.time),3.5,6+R*Mathf.Sin(3*w*Time.time)*Mathf.Cos(w*Time.time));
+		transform.LookAt(Target.transform);
+	}
+	if(CamState==2)
+	{
+		transform.position=Vector3(0,3,6);
+		transform.LookAt(Target.transform);
+	}
+	if(CamState==3)
+	{
+		if (Input.GetKey(KeyCode.LeftArrow)) transform.eulerAngles.y-=0.5; 
+		if (Input.GetKey(KeyCode.RightArrow)) transform.eulerAngles.y+=0.5; 
+		if (Input.GetKey(KeyCode.UpArrow)) transform.eulerAngles.x-=0.5; 
+		if (Input.GetKey(KeyCode.DownArrow)) transform.eulerAngles.x+=0.5; 
+		if (Input.GetKey(KeyCode.PageUp)) fov+=0.5; 
+		if (Input.GetKey(KeyCode.PageDown)) fov-=0.5; 
+ 	}
+	fov = Mathf.Clamp(fov, minFov, maxFov);
+	Camera.main.fieldOfView = fov;

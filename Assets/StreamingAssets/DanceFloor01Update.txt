@@ -1,0 +1,51 @@
+TIME=TIME+1;
+if(TIME==2)
+{
+	var R1=6f;
+	//Oracle.transform.position.x=0;
+	//Oracle.transform.position.z=-4;
+	Oracle.transform.position.x=0;
+	Oracle.transform.position.z=0;
+	for(n=0;n<NSites;n++)
+	{
+		//Dancers[n].transform.position.x=n+0.5-0.5*NSites;
+		Dancers[n].transform.position.x=R1*Mathf.Cos(n*6.28/NSites);
+		Dancers[n].transform.position.z=R1*Mathf.Sin(n*6.28/NSites);
+		Dancers[n].transform.LookAt(Oracle.transform);
+	}
+}
+for(n=0;n<NSites;n++)
+{
+		AniConts[n].SetInteger("TargState",-1);
+}
+if(TIME==REST) 
+{
+	TIME=0;
+	for(n=0;n<NSites;n++)
+	{
+		ValuesOld[n]=Values[n];
+	}
+	for(n=0;n<NSites;n++)
+	{
+		m=n-1; if(m<0) m=n+NSites;          xm=ValuesOld[m];
+		m=n;							    x0=ValuesOld[m];
+		m=n+1; if(m>NSites-1) m=n-NSites+1; xp=ValuesOld[m];
+		
+		if(xm==1 && x0==1 && xp==1) Values[n]=CARule[0];
+		if(xm==1 && x0==1 && xp==0) Values[n]=CARule[1];
+		if(xm==1 && x0==0 && xp==1) Values[n]=CARule[2];
+		if(xm==1 && x0==0 && xp==0) Values[n]=CARule[3];
+		if(xm==0 && x0==1 && xp==1) Values[n]=CARule[4];
+		if(xm==0 && x0==1 && xp==0) Values[n]=CARule[5];
+		if(xm==0 && x0==0 && xp==1) Values[n]=CARule[6];
+		if(xm==0 && x0==0 && xp==0) Values[n]=CARule[7];
+
+	}
+	m=Random.Range(1,4); //print(m);
+	for(n=0;n<NSites;n++)
+	{
+		AniConts[n].SetInteger("TargState",0); if( Values[n]) AniConts[n].SetInteger("TargState",m);
+		if( Values[n]) Sites[n].transform.localScale=Vector3(1.0,0.1,1.0);
+		if(!Values[n]) Sites[n].transform.localScale=Vector3(0.1,0.1,0.1);
+	}
+}

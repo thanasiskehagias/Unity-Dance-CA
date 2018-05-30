@@ -1,0 +1,35 @@
+
+	TIME=TIME+1;
+	for(n=0;n<NSites;n++)
+	{
+			AniConts[n].SetInteger("TargState",-1);
+	}
+	if(TIME==REST) 
+	{
+		TIME=0;
+		for(n=0;n<NSites;n++)
+		{
+			ValuesOld[n]=Values[n];
+		}
+		for(n=0;n<NSites;n++)
+		{
+			m=n-1; if(m<0) m=n+NSites;          xm=ValuesOld[m];
+			m=n;							    x0=ValuesOld[m];
+			m=n+1; if(m>NSites-1) m=n-NSites+1; xp=ValuesOld[m]; //print(m);
+			if( xm&& x0&& xp)  Values[n]=true;
+			if( xm&& x0&&!xp)  Values[n]=false;
+			if( xm&&!x0&& xp)  Values[n]=false;
+			if( xm&&!x0&&!xp)  Values[n]=true;
+			if(!xm&& x0&& xp)  Values[n]=false;
+			if(!xm&& x0&&!xp)  Values[n]=true;
+			if(!xm&&!x0&& xp)  Values[n]=false;
+			if(!xm&&!x0&&!xp)  Values[n]=true;
+		}
+		m=Random.Range(1,4); //print(m);
+		for(n=0;n<NSites;n++)
+		{
+			AniConts[n].SetInteger("TargState",0); if( Values[n]) AniConts[n].SetInteger("TargState",m);
+			if( Values[n]) Sites[n].transform.localScale=Vector3(1.0,0.1,1.0);
+			if(!Values[n]) Sites[n].transform.localScale=Vector3(0.1,0.1,0.1);
+		}
+	}
