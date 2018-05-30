@@ -1,4 +1,4 @@
-# Unity-Dance-CA
+# Unity Dance CA
 Unity3d project with dancers activated by 1d CA. Tested with Unity 2017.3.f3 on Win7.
 
 The user can choose  a 1d CArule  and *script* the dancers *at runtime* to follow it (read 20180530UnityCA.pdf, coming soon).
