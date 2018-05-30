@@ -3,7 +3,7 @@ Unity3d project with dancers activated by 1d CA. Tested with Unity 2017.3.f3 on 
 
 The user can choose  a 1d CArule  and *script* the dancers *at runtime* to follow it (read 20180530UnityCA.pdf, coming soon).
 
-Watch video at https://www.youtube.com/watch?v=D4l4Z98QMkg&feature=youtu.be .
+Watch video at https://www.youtube.com/watch?v=LTWnUV3hXgs&t=6s .
 
 ![Image](../master/DanceCAScreenShot.jpg?raw=true)
 
